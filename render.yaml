@@ -4,21 +4,19 @@ services:
     env: node
     region: oregon
     plan: free
-    buildCommand: npm install
-    startCommand: npm start
+    buildCommand: "npm install --omit=dev"
+    startCommand: "node server.js"
     healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 10000
       - key: MONGODB_URI
-        sync: false          # set manually in Render dashboard
+        sync: false
       - key: JWT_SECRET
-        sync: false          # set manually in Render dashboard
+        sync: false
       - key: OPENROUTER_API_KEY
-        sync: false          # set manually in Render dashboard
+        sync: false
       - key: OPENROUTER_MODEL
         value: openai/gpt-4o-mini
       - key: FRONTEND_URL
-        sync: false          # set to your Vercel URL after deploying frontend
+        sync: false
