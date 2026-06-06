@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hakim ሃኪም — Dashboard</title>
+  <link rel="stylesheet" href="assets/css/style.css"/>
+  <link rel="stylesheet" href="assets/css/dashboard.css"/>
+  <link rel="stylesheet" href="assets/css/selam.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+</head>
+<body data-theme="light">
+
+  <!-- BG blobs -->
+  <div class="bg-scene" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <canvas class="particles-canvas" id="particlesCanvas"></canvas>
+  </div>
+
+  <!-- ===== TOP NAVBAR ===== -->
+  <nav class="dash-nav">
+    <div class="dash-nav-inner">
+      <div class="nav-logo">
+        <span class="nav-logo-icon">🌿</span>
+        <div class="nav-logo-text">
+          <span class="logo-hakim">Hakim</span>
+          <span class="logo-amharic">ሃኪም</span>
+        </div>
+      </div>
+      <div class="dash-nav-right">
+        <div class="live-indicator">
+          <div class="live-dot"></div>
+          <span id="liveText" data-i18n="liveText">3 doctors online</span>
+        </div>
+        <div class="lang-toggle" id="langToggle">
+          <button class="lang-btn active" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="am">አማ</button>
+          <button class="lang-btn" data-lang="or">ORO</button>
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+          <span class="theme-icon sun">☀️</span>
+          <span class="theme-icon moon">🌙</span>
+        </button>
+
+        <!-- Profile Avatar + Dropdown -->
+        <div class="profile-wrap" id="profileWrap">
+          <div class="user-avatar" id="userAvatarBtn" title="Profile" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false">
+            <span id="userInitials">?</span>
+          </div>
+          <!-- Profile Dropdown -->
+          <div class="profile-dropdown" id="profileDropdown" aria-hidden="true">
+            <div class="pd-header">
+              <div class="pd-avatar" id="pdAvatar">?</div>
+              <div class="pd-info">
+                <div class="pd-name"  id="pdName">--</div>
+                <div class="pd-email" id="pdEmail">--</div>
+                <div class="pd-badge" id="pdBadge">Member</div>
+              </div>
+            </div>
+            <div class="pd-divider"></div>
+            <div class="pd-stats">
+              <div class="pd-stat">
+                <span class="pd-stat-val" id="pdJoined">--</span>
+                <span class="pd-stat-lbl" data-i18n="joined">Joined</span>
+              </div>
+              <div class="pd-stat">
+                <span class="pd-stat-val" id="pdMode">--</span>
+                <span class="pd-stat-lbl" data-i18n="tracker">Tracker</span>
+              </div>
+              <div class="pd-stat">
+                <span class="pd-stat-val" id="pdLang">EN</span>
+                <span class="pd-stat-lbl" data-i18n="language">Language</span>
+              </div>
+            </div>
+            <div class="pd-divider"></div>
+            <button class="pd-menu-item" id="pdEditProfile">
+              <span class="pd-item-icon">✏️</span>
+              <span data-i18n="editProfile">Edit Profile</span>
+            </button>
+            <button class="pd-menu-item" id="pdSettings">
+              <span class="pd-item-icon">⚙️</span>
+              <span data-i18n="settings">Settings</span>
+            </button>
+            <button class="pd-menu-item" id="pdHelpBtn">
+              <span class="pd-item-icon">💬</span>
+              <span data-i18n="helpSupport">Help &amp; Support</span>
+            </button>
+            <div class="pd-divider"></div>
+            <button class="pd-menu-item pd-logout" id="pdLogout">
+              <span class="pd-item-icon">🚪</span>
+              <span data-i18n="logout">Log Out</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN LAYOUT ===== -->
+  <div class="dash-layout">
+
+    <!-- ===== SCREENS ===== -->
+    <main class="dash-main" id="dashMain">
+
+      <!-- ============ HOME SCREEN ============ -->
+      <section class="dash-screen active" id="screen-home">
+        <div class="screen-scroll">
+          <div class="home-hero">
+            <div class="hero-text">
+              <div class="hero-badge">✦ Body Heals Him Self</div>
+              <h1 class="hero-title">Selam, <span id="heroName">Friend</span>! 👋</h1>
+              <p class="hero-sub">How are you feeling today?</p>
+            </div>
+            <div class="hero-mood">
+              <div class="mood-btn" data-mood="great">😄</div>
+              <div class="mood-btn" data-mood="good">🙂</div>
+              <div class="mood-btn" data-mood="okay">😐</div>
+              <div class="mood-btn" data-mood="low">😔</div>
+            </div>
+          </div>
+
+          <!-- Feature Grid -->
+          <div class="features-grid">
+            <div class="mod-card feature-card" data-screen="ai" role="button" tabindex="0">
+              <div class="mod-icon">🤖</div>
+              <div class="mod-body">
+                <h3>AI Advisor</h3>
+                <p>Health, beauty &amp; wellness chat + specialist connect</p>
+              </div>
+              <span class="mod-arrow">›</span>
+            </div>
+            <div class="mod-card feature-card" data-screen="skin" role="button" tabindex="0">
+              <div class="mod-icon">📸</div>
+              <div class="mod-body">
+                <h3>Skin Scan</h3>
+                <p>Upload photo → AI skin analysis &amp; recommendations</p>
+              </div>
+              <span class="mod-arrow">›</span>
+            </div>
+            <div class="mod-card feature-card" data-screen="product" role="button" tabindex="0">
+              <div class="mod-icon">🔍</div>
+              <div class="mod-body">
+                <h3>Product Truth</h3>
+                <p>Search any product — AI reads ingredients honestly</p>
+              </div>
+              <span class="mod-arrow">›</span>
+            </div>
+            <div class="mod-card feature-card" data-screen="report" role="button" tabindex="0">
+              <div class="mod-icon">📋</div>
+              <div class="mod-body">
+                <h3>Wellbeing Report</h3>
+                <p>Full nutrition &amp; exercise plan — professional grade</p>
+              </div>
+              <span class="mod-arrow">›</span>
+            </div>
+            <div class="mod-card feature-card" data-screen="spa" role="button" tabindex="0">
+              <div class="mod-icon">🏨</div>
+              <div class="mod-body">
+                <h3>Spa &amp; Resort</h3>
+                <p>Smart Kuriftu booking &amp; personalized packages</p>
+              </div>
+              <span class="mod-arrow">›</span>
+            </div>
+            <div class="mod-card feature-card" data-screen="farmers" role="button" tabindex="0">
+              <div class="mod-icon">🌾</div>
+              <div class="mod-body">
+                <h3>Farmers Health</h3>
+                <p>Seasonal health &amp; nutrition tips for agricultural workers</p>
+              </div>
+              <span class="mod-arrow">›</span>
+            </div>
+          </div>
+
+          <!-- Selam Banner -->
+          <div class="selam-banner mod-card" data-screen="selam" role="button" tabindex="0">
+            <div class="selam-icon">🤱</div>
+            <div class="selam-text">
+              <h3>Selam ሰላም — Pregnancy Companion</h3>
+              <p>Tracker · Calendar · AI advice — in Amharic, for every Ethiopian woman</p>
+            </div>
+            <span class="mod-arrow">›</span>
+          </div>
+
+          <!-- Emergency Banner -->
+          <div class="emergency-banner mod-card" data-screen="emergency" role="button" tabindex="0">
+            <div class="emergency-icon">🚨</div>
+            <div class="emergency-text">
+              <h3>Pregnancy Emergency</h3>
+              <p>SOS ambulance dispatch + live tracking map for subscribers</p>
+            </div>
+            <span class="mod-arrow">›</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SELAM SCREEN ============ -->
+      <section class="dash-screen" id="screen-selam">
+        <div class="screen-scroll">
+
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap">
+              <h2>Selam ሰላም</h2>
+              <p>Pregnancy &amp; Women's Health Companion</p>
+            </div>
+          </div>
+
+          <!-- Hero Banner -->
+          <div class="selam-hero">
+            <div class="selam-hero-icon">🌸</div>
+            <div class="selam-hero-text">
+              <h2>Your Wellness Companion</h2>
+              <p>Track your pregnancy journey or menstrual cycle — personalized for every Ethiopian woman.</p>
+            </div>
+          </div>
+
+          <!-- SVG Gradients (hidden) -->
+          <svg width="0" height="0" style="position:absolute">
+            <defs>
+              <linearGradient id="pregGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#a78bfa"/>
+                <stop offset="100%" stop-color="#f472b6"/>
+              </linearGradient>
+              <linearGradient id="periodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#f472b6"/>
+                <stop offset="100%" stop-color="#fb923c"/>
+              </linearGradient>
+            </defs>
+          </svg>
+
+          <!-- MODE SWITCHER -->
+          <div class="selam-mode-switch" id="selamModeSwitch">
+            <div class="mode-card pregnancy active" id="modePregnancy" role="button" tabindex="0">
+              <span class="mode-check">✓</span>
+              <span class="mode-icon">🤱</span>
+              <span class="mode-title">Pregnancy Tracker</span>
+              <span class="mode-sub">Track your 9-month journey</span>
+            </div>
+            <div class="mode-card period" id="modePeriod" role="button" tabindex="0">
+              <span class="mode-check">✓</span>
+              <span class="mode-icon">🌸</span>
+              <span class="mode-title">Period Tracker</span>
+              <span class="mode-sub">Cycle, ovulation &amp; health</span>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════
+               PREGNANCY SETUP PANEL
+               ═══════════════════════════════════ -->
+          <div class="setup-panel" id="pregSetupPanel">
+            <div class="setup-panel-title">
+              🤱 Set Up Pregnancy Tracker
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label">Your Full Name</label>
+                <input type="text" class="field-input" id="pregName" placeholder="e.g. Tigist Alemu"/>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Your Age</label>
+                <input type="number" class="field-input" id="pregAge" placeholder="25" min="15" max="55"/>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label">Pregnancy Start Date (LMP)</label>
+                <input type="date" class="field-input" id="pregLmpDate"/>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Week (if known)</label>
+                <input type="number" class="field-input" id="pregCurrentWeek" placeholder="e.g. 20" min="1" max="42"/>
+              </div>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Any current symptoms? (optional)</label>
+              <input type="text" class="field-input" id="pregSymptoms" placeholder="e.g. nausea, back pain, fatigue"/>
+            </div>
+            <button class="start-btn preg-btn" id="startPregTracker">
+              <span>✨</span> Start My Pregnancy Journey
+            </button>
+          </div>
+
+          <!-- ═══════════════════════════════════
+               PERIOD SETUP PANEL
+               ═══════════════════════════════════ -->
+          <div class="setup-panel hidden" id="periodSetupPanel">
+            <div class="setup-panel-title">
+              🌸 Set Up Period Tracker
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label">Your Name</label>
+                <input type="text" class="field-input" id="periodName" placeholder="e.g. Meron"/>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Your Age</label>
+                <input type="number" class="field-input" id="periodAge" placeholder="22" min="10" max="60"/>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label">Last Period Start Date</label>
+                <input type="date" class="field-input period-focus" id="lastPeriodDate"/>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Average Cycle Length (days)</label>
+                <input type="number" class="field-input period-focus" id="cycleLength" placeholder="28" min="21" max="45"/>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label class="field-label">Period Duration (days)</label>
+                <input type="number" class="field-input period-focus" id="periodDuration" placeholder="5" min="1" max="10"/>
+              </div>
+              <div class="field-group">
+                <label class="field-label">Current Symptoms (optional)</label>
+                <input type="text" class="field-input" id="periodSetupSymptoms" placeholder="e.g. cramps, mood swings"/>
+              </div>
+            </div>
+            <button class="start-btn period-btn" id="startPeriodTracker">
+              <span>🌸</span> Start My Cycle Tracker
+            </button>
+          </div>
+
+          <!-- ═══════════════════════════════════
+               PREGNANCY DASHBOARD
+               ═══════════════════════════════════ -->
+          <div class="tracker-view" id="pregView">
+            <button class="tracker-edit-btn" id="editPregBtn">✏️ Edit my profile</button>
+
+            <!-- Circular Progress -->
+            <div class="preg-circle-wrap">
+              <div class="preg-circle-card">
+                <div class="circle-progress-wrap">
+                  <svg class="circle-svg" width="160" height="160" viewBox="0 0 160 160">
+                    <circle class="circle-bg"   cx="80" cy="80" r="70"/>
+                    <circle class="circle-fill" cx="80" cy="80" r="70" id="pregCircleFill"/>
+                  </svg>
+                  <div class="circle-center">
+                    <span class="circle-week-num" id="pregWeekDisplay">--</span>
+                    <span class="circle-week-label">weeks</span>
+                  </div>
+                </div>
+                <div class="preg-name-display" id="pregNameDisplay">--</div>
+                <div class="trimester-badge t2" id="trimesterBadge">Trimester 2</div>
+                <div class="preg-meta-row">
+                  <div class="preg-meta-item">
+                    <span class="preg-meta-val" id="pregDueDate">--</span>
+                    <span class="preg-meta-lbl">Due Date</span>
+                  </div>
+                  <div class="preg-meta-item">
+                    <span class="preg-meta-val" id="pregDaysLeft">--</span>
+                    <span class="preg-meta-lbl">Days Left</span>
+                  </div>
+                  <div class="preg-meta-item">
+                    <span class="preg-meta-val" id="pregPercent">--</span>
+                    <span class="preg-meta-lbl">Complete</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Baby size -->
+            <div class="baby-size-card">
+              <div class="baby-emoji" id="babyEmoji">🫘</div>
+              <div class="baby-info">
+                <h4 id="babyTitle">Your baby this week</h4>
+                <p id="babyDesc">Loading baby info...</p>
+              </div>
+              <div class="baby-size-pill" id="babySizePill">--</div>
+            </div>
+
+            <!-- Weekly AI Insight -->
+            <div class="weekly-insight">
+              <div class="insight-header">
+                <div class="insight-dot"></div>
+                <span class="insight-label" id="insightWeekLabel">Week -- Insights</span>
+              </div>
+              <ul class="insight-list" id="pregInsightList">
+                <li>Loading personalized insights...</li>
+              </ul>
+            </div>
+
+            <!-- Health Tips -->
+            <div class="health-tips-row" id="pregHealthTips"></div>
+
+            <!-- Warning Signs -->
+            <div class="warning-cards-row">
+              <div class="warning-card amber">
+                <div class="wc-icon">⚡</div>
+                <div><div class="wc-title">Seek help for severe pain</div><div class="wc-text">Intense abdominal or back pain that doesn't ease — contact your health worker or call 907.</div></div>
+              </div>
+              <div class="warning-card rose">
+                <div class="wc-icon">💧</div>
+                <div><div class="wc-title">Notice unusual dizziness</div><div class="wc-text">Persistent dizziness or vision changes can signal blood pressure issues — rest and seek care.</div></div>
+              </div>
+              <div class="warning-card sky">
+                <div class="wc-icon">🌡️</div>
+                <div><div class="wc-title">Monitor fever carefully</div><div class="wc-text">A temperature above 38°C during pregnancy needs prompt medical attention at your nearest health post.</div></div>
+              </div>
+            </div>
+
+            <!-- Water Tracker -->
+            <div class="water-tracker">
+              <div class="water-header">
+                <span class="water-title">💧 Daily Water Intake</span>
+                <span class="water-count" id="waterCount">0 / 8 glasses</span>
+              </div>
+              <div class="water-cups" id="waterCups"></div>
+            </div>
+
+            <!-- Pregnancy Calendar -->
+            <div class="preg-calendar-card">
+              <div class="cal-header-row">
+                <button class="cal-nav-btn" id="pregCalPrev">‹</button>
+                <span class="cal-month-title" id="pregCalTitle">--</span>
+                <button class="cal-nav-btn" id="pregCalNext">›</button>
+              </div>
+              <div class="cal-weekdays">
+                <div class="cal-wd">Su</div><div class="cal-wd">Mo</div><div class="cal-wd">Tu</div>
+                <div class="cal-wd">We</div><div class="cal-wd">Th</div><div class="cal-wd">Fr</div><div class="cal-wd">Sa</div>
+              </div>
+              <div class="cal-days" id="pregCalDays"></div>
+              <div class="cal-legend">
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-today"></div>Today</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-milestone"></div>Milestone</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-appt"></div>Appointment</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-t1"></div>T1</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-t2"></div>T2</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-t3"></div>T3</div>
+              </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="preg-timeline">
+              <div class="timeline-title">📅 Prenatal Checkup Schedule</div>
+              <div class="timeline-track-wrap">
+                <div class="timeline-track">
+                  <div class="timeline-fill" id="pregTimelineFill" style="width:0%">
+                    <div class="timeline-thumb"></div>
+                  </div>
+                </div>
+                <div class="timeline-labels">
+                  <span>Week 1</span><span id="timelineMidLabel">Week 20</span><span>Week 42</span>
+                </div>
+                <div class="timeline-milestones" id="timelineMilestones"></div>
+              </div>
+            </div>
+
+            <!-- Appointments -->
+            <div class="appts-section">
+              <div class="appts-title">📌 My Appointments</div>
+              <div class="appt-add-row">
+                <input type="date" class="appt-add-input" id="apptDate"/>
+                <input type="text" class="appt-add-input" id="apptDesc" placeholder="e.g. Anatomy scan"/>
+                <button class="appt-add-btn" id="addApptBtn">+ Add</button>
+              </div>
+              <div class="appt-list-dynamic" id="apptListDynamic"></div>
+            </div>
+
+          </div><!-- /pregView -->
+
+          <!-- ═══════════════════════════════════
+               PERIOD DASHBOARD
+               ═══════════════════════════════════ -->
+          <div class="tracker-view" id="periodView">
+            <button class="tracker-edit-btn" id="editPeriodBtn">✏️ Edit my profile</button>
+
+            <!-- Cycle Ring -->
+            <div class="period-circle-card">
+              <div class="period-circle-wrap">
+                <svg class="circle-svg" width="160" height="160" viewBox="0 0 160 160">
+                  <circle class="period-circle-bg"   cx="80" cy="80" r="70"/>
+                  <circle class="period-circle-fill" cx="80" cy="80" r="70" id="periodCircleFill"/>
+                </svg>
+                <div class="circle-center">
+                  <span class="period-day-num" id="periodDayDisplay">--</span>
+                  <span class="period-day-lbl">of cycle</span>
+                </div>
+              </div>
+              <div class="preg-name-display" id="periodNameDisplay">--</div>
+              <div class="phase-tag follicular" id="phaseTag">Follicular Phase</div>
+              <div class="period-meta-grid">
+                <div class="period-meta-box">
+                  <span class="pmb-val" id="nextPeriodDays">--</span>
+                  <span class="pmb-lbl">Days to Period</span>
+                </div>
+                <div class="period-meta-box">
+                  <span class="pmb-val" id="ovulationDays">--</span>
+                  <span class="pmb-lbl">Ovulation in</span>
+                </div>
+                <div class="period-meta-box">
+                  <span class="pmb-val" id="cycleLengthDisplay">--</span>
+                  <span class="pmb-lbl">Cycle Length</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- AI Insight Messages -->
+            <div class="period-insight">
+              <div class="period-insight-hdr">
+                <div class="period-insight-dot"></div>
+                <span class="period-insight-lbl">Today's Wellness Insights</span>
+              </div>
+              <div class="period-insight-msgs" id="periodInsightMsgs"></div>
+            </div>
+
+            <!-- Period Calendar -->
+            <div class="period-calendar-card pcd">
+              <div class="cal-header-row">
+                <button class="cal-nav-btn" id="periodCalPrev">‹</button>
+                <span class="cal-month-title" id="periodCalTitle">--</span>
+                <button class="cal-nav-btn" id="periodCalNext">›</button>
+              </div>
+              <div class="cal-weekdays">
+                <div class="cal-wd">Su</div><div class="cal-wd">Mo</div><div class="cal-wd">Tu</div>
+                <div class="cal-wd">We</div><div class="cal-wd">Th</div><div class="cal-wd">Fr</div><div class="cal-wd">Sa</div>
+              </div>
+              <div class="cal-days" id="periodCalDays"></div>
+              <div class="period-cal-legend">
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-period"></div>Period</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-ovulation"></div>Ovulation</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-fertile"></div>Fertile</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-pms"></div>PMS</div>
+                <div class="cal-leg-item"><div class="cal-leg-dot leg-today"></div>Today</div>
+              </div>
+            </div>
+
+            <!-- Symptom Log -->
+            <div class="period-symptom-log mod-card">
+              <div class="psl-title">Log Today</div>
+              <div class="period-sym-chips">
+                <button class="p-sym-chip" data-sym="cramps">Cramps</button>
+                <button class="p-sym-chip" data-sym="headache">Headache</button>
+                <button class="p-sym-chip" data-sym="bloating">Bloating</button>
+                <button class="p-sym-chip" data-sym="fatigue">Fatigue</button>
+                <button class="p-sym-chip" data-sym="nausea">Nausea</button>
+                <button class="p-sym-chip" data-sym="backpain">Back pain</button>
+                <button class="p-sym-chip" data-sym="spotting">Spotting</button>
+                <button class="p-sym-chip" data-sym="energetic">Energetic</button>
+                <button class="p-sym-chip" data-sym="anxious">Anxious</button>
+                <button class="p-sym-chip" data-sym="hotflash">Hot flash</button>
+              </div>
+              <div class="flow-row">
+                <span class="flow-label">Flow intensity</span>
+                <div class="flow-options">
+                  <div class="flow-opt active" data-flow="none">None</div>
+                  <div class="flow-opt" data-flow="light">Light</div>
+                  <div class="flow-opt" data-flow="medium">Medium</div>
+                  <div class="flow-opt" data-flow="heavy">Heavy</div>
+                </div>
+              </div>
+              <div class="mood-row">
+                <span class="mood-label">Today's mood</span>
+                <div class="mood-options">
+                  <div class="mood-opt" data-mood="happy">😊</div>
+                  <div class="mood-opt" data-mood="calm">😌</div>
+                  <div class="mood-opt active" data-mood="okay">😐</div>
+                  <div class="mood-opt" data-mood="sad">😔</div>
+                  <div class="mood-opt" data-mood="irritable">😤</div>
+                </div>
+              </div>
+              <button class="save-log-btn" id="savePeriodLogBtn">💾 Save today's log</button>
+              <div class="eth-tip">
+                <h4>🌿 Ethiopian cycle care</h4>
+                <p>Koseret tea soothes cramps. Rue (tena adam) helps with headaches. Warm teff injera meals support low energy days. Rest and gentle movement are your friends this week.</p>
+              </div>
+            </div>
+
+            <!-- Reminders -->
+            <div class="reminders-section">
+              <div class="rem-title">🔔 Health Reminders</div>
+              <div class="reminder-cards">
+                <div class="reminder-card on" id="remMed">
+                  <div class="rem-icon">💊</div>
+                  <div class="rem-name">Medication</div>
+                  <div class="rem-time">8:00 AM daily</div>
+                  <div class="rem-toggle">ON</div>
+                </div>
+                <div class="reminder-card" id="remWater">
+                  <div class="rem-icon">💧</div>
+                  <div class="rem-name">Hydration</div>
+                  <div class="rem-time">Every 2 hours</div>
+                  <div class="rem-toggle">OFF</div>
+                </div>
+                <div class="reminder-card on" id="remPeriod">
+                  <div class="rem-icon">🌸</div>
+                  <div class="rem-name">Period Alert</div>
+                  <div class="rem-time">3 days before</div>
+                  <div class="rem-toggle">ON</div>
+                </div>
+                <div class="reminder-card" id="remSleep">
+                  <div class="rem-icon">🌙</div>
+                  <div class="rem-name">Sleep</div>
+                  <div class="rem-time">10:00 PM</div>
+                  <div class="rem-toggle">OFF</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /periodView -->
+
+          <!-- Danger signs (always visible at bottom) -->
+          <div class="danger-signs-card" style="margin-top:1rem">
+            <div class="danger-header">⚠️ Seek help immediately if you have:</div>
+            <p>Heavy bleeding • Severe headache • Vision changes • Severe abdominal pain • Fever above 38°C • Baby not moving • Convulsions</p>
+            <button class="emergency-btn" data-screen="emergency">🚨 Call Emergency Now</button>
+          </div>
+
+        </div><!-- /screen-scroll -->
+      </section>
+
+      <!-- ============ FARMERS SCREEN ============ -->
+      <section class="dash-screen" id="screen-farmers">
+        <div class="screen-scroll">
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap">
+              <h2>Farmers Health ሰብሳቢ</h2>
+              <p>Seasonal health for Ethiopian agricultural workers</p>
+            </div>
+          </div>
+
+          <div class="season-banner mod-card">
+            <div class="season-icon">🌧️</div>
+            <div>
+              <h3>Kiremt (Rainy Season)</h3>
+              <p>Stay Strong in the Field</p>
+            </div>
+          </div>
+
+          <div class="farmers-tabs">
+            <button class="ftab active" data-ftab="health">💪 Health Tips</button>
+            <button class="ftab" data-ftab="nutrition">🥗 Nutrition</button>
+            <button class="ftab" data-ftab="safety">⛑️ Safety</button>
+            <button class="ftab" data-ftab="calendar">📅 Farm Calendar</button>
+            <button class="ftab" data-ftab="ai">🤖 AI Advisor</button>
+          </div>
+
+          <div class="ftab-content active" id="ftab-health">
+            <div class="farmers-card mod-card"><div class="f-icon">🌡️</div><div><h4>Heat &amp; Sun Protection (ሙቀት)</h4><p>Drink at least 3–4 liters of water daily during fieldwork. Wear a wide-brimmed hat. Take shade breaks every 2 hours. Signs of heat stroke: dizziness, confusion — seek shade and drink water immediately.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">💪</div><div><h4>Back &amp; Joint Health</h4><p>Bend your knees when lifting heavy loads, not your back. Alternate sides when carrying. Stretch your lower back and legs each morning before fieldwork.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">🦟</div><div><h4>Malaria Prevention (Kiremt season)</h4><p>Sleep under an insecticide-treated bed net every night. Wear long sleeves at dusk. If you have fever, chills, and headache after working in fields — visit the nearest health post within 24 hours.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">🌿</div><div><h4>Traditional Farmer Remedies</h4><p>Koseret tea for stomach pain. Rue (tena adam) for headaches. Ginger root for nausea from pesticide smell. Garlic for infections. Always also visit a health worker for serious symptoms.</p></div></div>
+          </div>
+
+          <div class="ftab-content" id="ftab-nutrition">
+            <div class="farmers-card mod-card"><div class="f-icon">🥗</div><div><h4>Energy foods for fieldwork</h4><p>Teff injera provides long-lasting energy. Shiro wot (chickpea stew) is high in protein. Ater (split peas) are iron-rich. Enset (false banana) is great for sustained energy.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">💊</div><div><h4>Common deficiencies in farm workers</h4><p>Iron deficiency (anemia) is very common — eat gomen, misir, and teff daily. Vitamin A — eat carrots, sweet potato, mango during harvest. Iodine — use iodized salt always.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">🤱</div><div><h4>Pregnant farm workers — special care</h4><p>Avoid heavy lifting and chemical pesticides during pregnancy. Increase protein intake (eggs, ayib, legumes). Take iron + folic acid tablets from your health post.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">💧</div><div><h4>Hydration plan for harvest days</h4><p>Morning (before work): 2 glasses water. Every hour in field: 1 glass. Lunch break: 2 glasses. Evening: 2 glasses. Tella/suwa only after work — alcohol dehydrates during fieldwork.</p></div></div>
+          </div>
+
+          <div class="ftab-content" id="ftab-safety">
+            <div class="farmers-card mod-card"><div class="f-icon">⚠️</div><div><h4>Pesticide safety (ፀረ-ተባይ)</h4><p>Always wear gloves and a mask when applying pesticides. Do NOT eat, drink, or smoke during application. Wash hands and face immediately after. Keep children away from sprayed fields for 24–48 hours.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">🐍</div><div><h4>Snake &amp; insect bites</h4><p>Wear closed shoes and thick socks when working. If bitten by a snake: stay calm, immobilize the bitten limb, do NOT cut or suck the wound — go to the nearest health center immediately.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">🔪</div><div><h4>Injury prevention</h4><p>Keep tools sharp (dull tools cause more accidents from slipping). Wear protective footwear. If cut: clean with clean water, apply pressure, and visit a health post for stitches if deep.</p></div></div>
+            <div class="farmers-card mod-card"><div class="f-icon">🌊</div><div><h4>Flood season safety</h4><p>Do not cross flooded rivers or streams. Only drink boiled or treated water after floods. Report unusual illness clusters to your kebele health worker.</p></div></div>
+          </div>
+
+          <div class="ftab-content" id="ftab-calendar">
+            <h3 class="section-title" style="margin-bottom:1rem">Ethiopian farming calendar — health priorities</h3>
+            <div class="farm-calendar-grid">
+              <div class="farm-season mod-card"><div class="fs-header"><span>☀️</span><strong>Tir–Yekatit (Jan–Feb)</strong></div><p>🌾 Harvest season. Dust and chaff can irritate lungs — cover nose and mouth. High physical load — rest, eat well. Eye irritation from dust: rinse with clean water.</p></div>
+              <div class="farm-season mod-card"><div class="fs-header"><span>🌱</span><strong>Megabit–Miazia (Mar–Apr)</strong></div><p>🌱 Planting prep. Back strain risk from land preparation. Ensure good nutrition before planting. Water sources may be low — prioritize hydration.</p></div>
+              <div class="farm-season mod-card"><div class="fs-header"><span>🌦️</span><strong>Ginbot–Sene (May–Jun)</strong></div><p>🌦️ Short rains (Belg). Malaria risk rising. Ensure bed nets are intact. Diarrhea from contaminated water — boil all water.</p></div>
+              <div class="farm-season mod-card season-active"><div class="fs-header"><span>🌧️</span><strong>Hamle–Nehase (Jul–Aug)</strong></div><p>🌧️ Kiremt (main rains). Peak malaria season — use treated nets daily. Flooding risk. Respiratory infections from cold and wet. Heavy weeding work — protect back.</p></div>
+              <div class="farm-season mod-card"><div class="fs-header"><span>🌸</span><strong>Meskerem–Tikimt (Sep–Oct)</strong></div><p>🌸 Harvest begins. Allergy season from pollen. Snake activity increases. Tick bites possible during harvest — check skin daily.</p></div>
+              <div class="farm-season mod-card"><div class="fs-header"><span>❄️</span><strong>Hidar–Tahsas (Nov–Dec)</strong></div><p>❄️ Dry cold season. Pneumonia and respiratory infections. Skin cracking from dryness — use shea butter or niter kibbeh.</p></div>
+            </div>
+          </div>
+
+          <div class="ftab-content" id="ftab-ai">
+            <div class="ai-chat-card mod-card">
+              <div class="ai-header">
+                <div class="ai-avatar">🌾</div>
+                <div><h3>Hakim Farmers Advisor</h3><p>Selam! I'm here to answer your health questions as an Ethiopian farmer.</p></div>
+              </div>
+              <div class="ai-suggestions">
+                <button class="ai-suggestion">💪 Back pain from fieldwork?</button>
+                <button class="ai-suggestion">🐍 Snake bite first aid?</button>
+                <button class="ai-suggestion">🥗 Energy foods for planting?</button>
+                <button class="ai-suggestion">🤒 Fever after fieldwork?</button>
+              </div>
+              <div class="ai-messages" id="farmersMessages"></div>
+              <div class="ai-input-row">
+                <input type="text" class="form-input ai-input" id="farmersInput" placeholder="Ask your health question…"/>
+                <button class="ai-send-btn" id="farmersSend">➤</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ EMERGENCY SCREEN ============ -->
+      <section class="dash-screen" id="screen-emergency">
+        <div class="screen-scroll">
+          <div class="screen-header emergency-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap">
+              <h2>Emergency System 🚨</h2>
+              <p>Pregnancy emergency dispatch &amp; tracking</p>
+            </div>
+          </div>
+
+          <div class="emergency-hero mod-card">
+            <div class="emergency-badge">✦ Hakim Emergency Network</div>
+            <h2>You are not alone</h2>
+            <p>Tap the SOS button to instantly alert nearby ambulances and your emergency contacts.</p>
+          </div>
+
+          <button class="sos-btn" id="sosBtn">
+            <div class="sos-ripple r1"></div>
+            <div class="sos-ripple r2"></div>
+            <div class="sos-ripple r3"></div>
+            <span class="sos-icon">🚨</span>
+            <span class="sos-text">SEND SOS — PREGNANCY EMERGENCY</span>
+          </button>
+          <p class="sos-sub">Tap to alert nearest maternity hospitals &amp; emergency contacts</p>
+
+          <div class="danger-list mod-card">
+            <h3>⚠️ Call emergency if you have:</h3>
+            <div class="danger-grid">
+              <span class="danger-tag">🩸 Heavy bleeding</span>
+              <span class="danger-tag">🤯 Severe headache</span>
+              <span class="danger-tag">👁️ Vision changes</span>
+              <span class="danger-tag">😖 Severe pain</span>
+              <span class="danger-tag">🌡️ High fever</span>
+              <span class="danger-tag">👶 Baby not moving</span>
+              <span class="danger-tag">💦 Fluid leaking</span>
+              <span class="danger-tag">⚡ Convulsions</span>
+            </div>
+          </div>
+
+          <!-- Map simulation -->
+          <div class="ambulance-tracker mod-card">
+            <div class="tracker-header">
+              <h3>🗺️ Live Ambulance Tracking</h3>
+              <span class="premium-badge">Premium</span>
+            </div>
+            <div class="map-sim" id="mapSim">
+              <div class="map-road map-road-h"></div>
+              <div class="map-road map-road-v"></div>
+              <div class="map-pin">📍</div>
+              <div class="map-ambulance" id="mapAmbulance">🚑</div>
+              <div class="map-hospital">🏥</div>
+              <div class="map-eta">ETA: 8 min</div>
+            </div>
+            <div class="ambulance-status">
+              <div class="amb-badge">🚑</div>
+              <div>
+                <strong>Ambulance Unit-07 dispatched</strong>
+                <p>Arriving in approximately 8 minutes</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hospitals -->
+          <h3 class="section-title">🏥 Nearby maternity facilities</h3>
+          <div class="hospital-card mod-card">
+            <div class="hosp-info">
+              <div><strong>St. Paul's Hospital Millennium</strong><span class="hosp-dist"> · Addis Ababa · 2.4 km away</span></div>
+              <span class="badge-free">Free</span>
+            </div>
+            <div class="hosp-meta"><span>🚑 Ambulance available</span><span>📞 111</span></div>
+            <button class="call-btn">📞 Call Now</button>
+          </div>
+          <div class="hospital-card mod-card">
+            <div class="hosp-info">
+              <div><strong>Black Lion (Tikur Anbessa) Hospital</strong><span class="hosp-dist"> · 3.8 km away</span></div>
+              <span class="badge-free">Free</span>
+            </div>
+            <div class="hosp-meta"><span>🚑 24/7 maternity</span><span>📞 011-551-5509</span></div>
+            <button class="call-btn">📞 Call Now</button>
+          </div>
+          <div class="hospital-card mod-card premium-hosp">
+            <div class="hosp-info">
+              <div><strong>Hakim Emergency Network 🌟</strong><span class="hosp-dist"> · Premium private ambulance</span></div>
+              <span class="badge-paid">Paid 💰</span>
+            </div>
+            <p style="font-size:0.82rem;color:var(--text-secondary);margin:0.5rem 0">Advanced Life Support ambulance with midwife on board. Real-time GPS tracking. Average response: 6 min in Addis Ababa.</p>
+            <div class="premium-btns">
+              <button class="primary-btn" style="flex:1"><span class="btn-text">Subscribe — 500 ETB/mo</span></button>
+              <button class="call-btn">📞 Call</button>
+            </div>
+          </div>
+
+          <!-- Emergency contacts -->
+          <div class="contacts-card mod-card">
+            <h3>👥 Your emergency contacts</h3>
+            <div class="contact-slot"><div><strong>Contact 1</strong><p>Husband / family member</p></div><button class="add-contact-btn">+ Add</button></div>
+            <div class="contact-slot"><div><strong>Contact 2</strong><p>Neighbor / midwife</p></div><button class="add-contact-btn">+ Add</button></div>
+          </div>
+
+          <!-- National numbers -->
+          <div class="national-numbers mod-card">
+            <h3>📞 National emergency numbers</h3>
+            <div class="num-grid">
+              <a href="tel:907" class="num-card">🚑 Ambulance: <strong>907</strong></a>
+              <a href="tel:8335" class="num-card">🏥 Health hotline: <strong>8335</strong></a>
+              <a href="tel:991" class="num-card">👮 Police: <strong>991</strong></a>
+              <a href="tel:939" class="num-card">🔥 Fire: <strong>939</strong></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ AI ADVISOR SCREEN ============ -->
+      <section class="dash-screen" id="screen-ai">
+        <div class="screen-scroll ai-screen-inner">
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap">
+              <h2>AI Advisor 🤖</h2>
+              <p>Health · Beauty · Wellness · Specialists</p>
+            </div>
+          </div>
+
+          <div class="pregnancy-check mod-card">
+            <h4>🤰 Are you currently pregnant?</h4>
+            <div class="pg-btns">
+              <button class="pg-btn active" id="pgYes">Yes, I am</button>
+              <button class="pg-btn" id="pgNo">No</button>
+            </div>
+          </div>
+
+          <div class="ai-topic-tabs">
+            <button class="aitab active" data-aitab="health">🌿 Health</button>
+            <button class="aitab" data-aitab="beauty">✨ Beauty</button>
+            <button class="aitab" data-aitab="mind">🧘 Mind</button>
+            <button class="aitab" data-aitab="nutrition">🥗 Nutrition</button>
+          </div>
+
+          <div class="ai-chat-card mod-card ai-main-chat">
+            <div class="ai-intro">
+              <div class="ai-avatar-large">🌿</div>
+              <div class="ai-intro-text">
+                <strong>Hakim AI</strong>
+                <p>Selam! I'm your personal wellness advisor. Ask me anything about your health, beauty, or wellbeing — in Amharic or English.</p>
+              </div>
+            </div>
+            <div class="ai-messages" id="aiMessages">
+              <div class="ai-msg ai"><div class="msg-avatar">🌿</div><div class="msg-bubble">Selam! How can I help your wellness journey today? 🌿<span class="msg-time">Now</span></div></div>
+            </div>
+            <div class="ai-suggestions" id="aiSuggestions">
+              <button class="ai-suggestion">🌿 Best Ethiopian face moisturizers?</button>
+              <button class="ai-suggestion">🧘 Stress relief — Ethiopian tradition?</button>
+              <button class="ai-suggestion">🥗 Ethiopian foods for immunity?</button>
+            </div>
+            <div class="ai-input-row">
+              <input type="text" class="form-input ai-input" id="aiInput" placeholder="Ask Hakim AI…"/>
+              <button class="ai-send-btn" id="aiSend">➤</button>
+            </div>
+          </div>
+
+          <!-- Specialists -->
+          <h3 class="section-title" style="margin-top:1.5rem">Or connect to a specialist</h3>
+          <div class="specialists-list">
+            <div class="specialist-card mod-card">
+              <div class="spec-avatar">DK</div>
+              <div class="spec-info">
+                <strong>Dr. Kidist Haile</strong>
+                <p>Dermatologist &amp; Beauty Specialist</p>
+                <div class="spec-meta"><span>★★★★★ 4.9</span><span>128 patients</span><span class="spec-status available">Available</span></div>
+              </div>
+              <button class="book-btn">Book consultation</button>
+            </div>
+            <div class="specialist-card mod-card">
+              <div class="spec-avatar">BT</div>
+              <div class="spec-info">
+                <strong>Birtukan Tadesse</strong>
+                <p>Nutritionist &amp; Wellness Coach</p>
+                <div class="spec-meta"><span>★★★★☆ 4.7</span><span>84 patients</span><span class="spec-status in2h">In 2hrs</span></div>
+              </div>
+              <button class="book-btn">Book consultation</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SKIN SCAN SCREEN ============ -->
+      <section class="dash-screen" id="screen-skin">
+        <div class="screen-scroll">
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap"><h2>Skin Scan 📸</h2><p>AI skin analysis from your photo</p></div>
+          </div>
+          <p class="screen-desc">Upload a clear photo of your face or affected skin area. Hakim AI will analyze your skin type, concerns, and recommend Ethiopian natural solutions.</p>
+          <div class="upload-zone mod-card" id="uploadZone">
+            <div class="upload-inner">
+              <span class="upload-icon">📷</span>
+              <p>Tap to upload photo</p>
+              <span class="upload-hint">Face or body skin · JPG, PNG</span>
+            </div>
+            <input type="file" accept="image/*" id="skinPhoto" style="display:none"/>
+          </div>
+          <div class="skin-options">
+            <div class="skin-option-group">
+              <label class="input-label">Area</label>
+              <div class="option-chips">
+                <button class="option-chip active">Face</button>
+                <button class="option-chip">Body skin</button>
+                <button class="option-chip">Scalp &amp; hair</button>
+              </div>
+            </div>
+            <div class="skin-option-group">
+              <label class="input-label">Concern (optional)</label>
+              <div class="option-chips">
+                <button class="option-chip active">Acne</button>
+                <button class="option-chip">Dryness</button>
+                <button class="option-chip">Dark spots</button>
+              </div>
+            </div>
+          </div>
+          <button class="primary-btn" id="analyzeSkinBtn"><span class="btn-text">🔬 Analyze my skin</span><span class="btn-spinner"></span></button>
+          <div class="skin-result hidden" id="skinResult">
+            <div class="skin-score-card mod-card">
+              <div class="score-ring"><span class="score-num">82</span><span class="score-label">Skin score</span></div>
+              <div class="skin-detected"><h4>Detected</h4><p>Mild acne · Slight hyperpigmentation · Normal oil levels</p></div>
+            </div>
+            <div class="skin-recs mod-card">
+              <h4>🌿 AI recommendations</h4>
+              <ul class="rec-list">
+                <li>Apply <strong>Niter Kibbeh (spiced butter)</strong> as a night moisturizer — reduces inflammation</li>
+                <li>Use <strong>Turmeric + honey mask</strong> 2× per week for hyperpigmentation</li>
+                <li>Drink 2L water daily; eat more <strong>avocado and lemon</strong></li>
+                <li>Avoid heavy commercial creams with parabens on dark skin tones</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ PRODUCT TRUTH SCREEN ============ -->
+      <section class="dash-screen" id="screen-product">
+        <div class="screen-scroll">
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap"><h2>Product Truth 🔍</h2><p>AI reads ingredients — no marketing, just facts</p></div>
+          </div>
+          <p class="screen-desc">Search any beauty or hair product. Hakim AI reads the ingredient list and tells you honestly if it's good for your skin/hair type.</p>
+          <div class="input-group">
+            <div class="input-wrapper">
+              <span class="input-icon">🔍</span>
+              <input type="text" class="form-input" id="productSearch" placeholder="e.g. Fair &amp; Lovely, Dark &amp; Lovely, Vaseline…"/>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Your skin/hair type (optional)</label>
+            <div class="option-chips">
+              <button class="option-chip active">Oily skin</button>
+              <button class="option-chip">Dry skin</button>
+              <button class="option-chip">Sensitive skin</button>
+              <button class="option-chip">Coily/4C hair</button>
+              <button class="option-chip">Damaged/relaxed hair</button>
+            </div>
+          </div>
+          <button class="primary-btn" id="analyzeProductBtn"><span class="btn-text">🔬 Analyze this product</span><span class="btn-spinner"></span></button>
+          <div class="product-result hidden" id="productResult">
+            <div class="product-verdict mod-card">
+              <div class="verdict-header">
+                <h3 id="productName">Fair &amp; Lovely</h3>
+                <span class="verdict-badge warn">⚠️ Caution</span>
+              </div>
+              <div class="ingredient-list">
+                <div class="ingr bad">❌ Hydroquinone — skin bleaching agent, avoid long-term use</div>
+                <div class="ingr warn">⚠️ Niacinamide — generally safe but may sensitize dark skin</div>
+                <div class="ingr ok">✅ Glycerin — good humectant, safe for all skin types</div>
+                <div class="ingr ok">✅ Vitamin C — brightening, antioxidant, generally beneficial</div>
+              </div>
+            </div>
+            <div class="alternatives mod-card">
+              <h4>🌿 Ethiopian natural alternatives</h4>
+              <ul class="rec-list">
+                <li><strong>Argan oil</strong> — natural moisturizer, safe for all skin tones</li>
+                <li><strong>Niter Kibbeh</strong> — traditional Ethiopian butter, deeply nourishing</li>
+                <li><strong>Turmeric paste</strong> — natural brightening, anti-inflammatory</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ WELLBEING REPORT ============ -->
+      <section class="dash-screen" id="screen-report">
+        <div class="screen-scroll">
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap"><h2>Wellbeing Report 📋</h2><p>Your personalized wellness plan</p></div>
+          </div>
+          <form class="report-form mod-card" id="reportForm">
+            <div class="input-row">
+              <div class="input-group"><label class="input-label">Age</label><div class="input-wrapper"><input type="number" class="form-input" id="rAge" placeholder="25"/></div></div>
+              <div class="input-group"><label class="input-label">Gender</label><div class="input-wrapper"><select class="form-input" id="rGender"><option>Female</option><option>Male</option></select></div></div>
+            </div>
+            <div class="input-row">
+              <div class="input-group"><label class="input-label">Weight (kg)</label><div class="input-wrapper"><input type="number" class="form-input" id="rWeight" placeholder="60"/></div></div>
+              <div class="input-group"><label class="input-label">Height (cm)</label><div class="input-wrapper"><input type="number" class="form-input" id="rHeight" placeholder="165"/></div></div>
+            </div>
+            <div class="input-group"><label class="input-label">Activity level</label><select class="form-input" id="rActivity"><option>Sedentary</option><option>Lightly active</option><option selected>Moderately active</option><option>Very active</option></select></div>
+            <div class="input-group"><label class="input-label">Main goal</label><select class="form-input" id="rGoal"><option>Lose weight</option><option>Gain weight</option><option>Build muscle</option><option selected>Maintain health</option></select></div>
+            <button type="submit" class="primary-btn"><span class="btn-text">📋 Generate my plan</span><span class="btn-spinner"></span></button>
+          </form>
+          <div class="report-result hidden" id="reportResult">
+            <div class="report-section mod-card"><h3>🌿 Wellness Plan</h3><div id="wellnessPlan"></div></div>
+            <div class="report-section mod-card"><h3>🥗 Nutrition</h3><div id="nutritionPlan"></div></div>
+            <div class="report-section mod-card"><h3>💪 Exercise</h3><div id="exercisePlan"></div></div>
+            <div class="report-section mod-card"><h3>🍽️ Ethiopian Meal Plan</h3><div id="mealPlan"></div></div>
+            <button class="secondary-btn" id="recalcBtn">Recalculate</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ SPA & RESORT ============ -->
+      <section class="dash-screen" id="screen-spa">
+        <div class="screen-scroll">
+          <div class="screen-header">
+            <button class="back-btn" data-back="home">←</button>
+            <div class="screen-title-wrap"><h2>Spa &amp; Resort 🏨</h2><p>Kuriftu African Village</p></div>
+          </div>
+          <div class="spa-hero mod-card">
+            <div class="spa-hero-img">🏞️</div>
+            <div>
+              <h3>Kuriftu African Village</h3>
+              <p>Bishoftu, Lake Babogaya · Ethiopia's premier wellness resort</p>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="input-label">What brings you here?</label>
+            <div class="option-chips" id="spaGoals">
+              <button class="option-chip active">Relaxation &amp; stress relief</button>
+              <button class="option-chip">Beauty &amp; glow treatment</button>
+              <button class="option-chip">Honeymoon / couples</button>
+              <button class="option-chip">Postpartum recovery</button>
+              <button class="option-chip">Detox &amp; fitness</button>
+            </div>
+          </div>
+          <button class="primary-btn" id="findPackageBtn"><span class="btn-text">✨ Find my package</span><span class="btn-spinner"></span></button>
+          <div class="spa-packages hidden" id="spaPackages">
+            <div class="spa-package mod-card">
+              <div class="pkg-icon">🧘</div>
+              <div class="pkg-info"><h4>Serenity Retreat</h4><p>3-day stress relief package · Includes massage, herbal bath, meditation</p><span class="pkg-price">From 4,500 ETB</span></div>
+            </div>
+            <div class="spa-package mod-card">
+              <div class="pkg-icon">✨</div>
+              <div class="pkg-info"><h4>Ethiopian Glow Package</h4><p>Full body scrub, turmeric facial, niter kibbeh treatment</p><span class="pkg-price">From 2,800 ETB</span></div>
+            </div>
+          </div>
+          <div class="input-group" style="margin-top:1rem">
+            <label class="input-label">Check-in date</label>
+            <div class="input-wrapper"><input type="date" class="form-input" id="checkinDate"/></div>
+          </div>
+          <button class="primary-btn" id="confirmBookingBtn"><span class="btn-text">✅ Confirm booking</span></button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===== BOTTOM NAV ===== -->
+    <nav class="bottom-nav" id="bottomNav">
+      <button class="bnav-btn active" data-screen="home"><span class="bnav-icon">🏠</span><span class="bnav-label">Home</span><div class="bnav-indicator"></div></button>
+      <button class="bnav-btn" data-screen="selam"><span class="bnav-icon">🤱</span><span class="bnav-label">Selam</span><div class="bnav-indicator"></div></button>
+      <button class="bnav-btn" data-screen="farmers"><span class="bnav-icon">🌾</span><span class="bnav-label">Farmers</span><div class="bnav-indicator"></div></button>
+      <button class="bnav-btn" data-screen="ai"><span class="bnav-icon">🤖</span><span class="bnav-label">AI Chat</span><div class="bnav-indicator"></div></button>
+      <button class="bnav-btn emergency-nav" data-screen="emergency"><span class="bnav-icon">🚨</span><span class="bnav-label">Emergency</span><div class="bnav-indicator"></div></button>
+    </nav>
+
+  </div><!-- /dash-layout -->
+
+  <!-- ===== PROFILE MODAL ===== -->
+  <div class="modal-overlay hidden" id="profileModal" role="dialog" aria-modal="true" aria-label="Edit Profile">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 data-i18n="editProfile">Edit Profile</h3>
+        <button class="modal-close" id="closeProfileModal" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-avatar-row">
+        <div class="modal-avatar-circle" id="modalAvatarCircle">?</div>
+        <div>
+          <div class="modal-name-big" id="modalNameBig">--</div>
+          <div class="modal-email-sm" id="modalEmailSm">--</div>
+        </div>
+      </div>
+      <div class="modal-field-group">
+        <label class="modal-label" data-i18n="fullName">Full Name</label>
+        <input type="text" class="modal-input" id="editName" placeholder="Your name"/>
+      </div>
+      <div class="modal-field-group">
+        <label class="modal-label" data-i18n="email">Email</label>
+        <input type="email" class="modal-input" id="editEmail" placeholder="your@email.com"/>
+      </div>
+      <div class="modal-field-group">
+        <label class="modal-label" data-i18n="phone">Phone</label>
+        <input type="tel" class="modal-input" id="editPhone" placeholder="+251 9xx xxx xxx"/>
+      </div>
+      <button class="modal-save-btn" id="saveProfileBtn" data-i18n="saveChanges">Save Changes</button>
+    </div>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+  <script src="assets/js/selam.js"></script>
+</body>
+</html>
