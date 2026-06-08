@@ -613,8 +613,8 @@ const API_BASE = (function () {
   if (host === 'localhost' || host === '127.0.0.1' || location.protocol === 'file:') {
     return 'http://localhost:5000';
   }
-  // ← Replace this with your actual Render URL after deploying
-  return 'https://hakim-wellness-api.onrender.com';
+  // Production — your Render backend
+  return 'https://hakimbet-1.onrender.com';
 })();
 
 async function fetchAPI(endpoint, options = {}) {
